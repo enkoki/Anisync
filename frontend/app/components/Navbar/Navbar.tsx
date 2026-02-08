@@ -17,9 +17,9 @@ const Navbar = ({isloggedin = false}) => {
         <Image src={SiteLogoD} alt="anisync-logo" className='w-13 h-13'/>
         <nav>
             <ul className='flex gap-10 font-bold text-[20px] justify-center items-center'>
-                <li ><Link href="/about">About</Link></li>
-                <li><Link href="/profile">Profile</Link></li>
-                <li className={pathname === '/' ? 'text-[#6200ED]' : ''}><Link href="/home">Home</Link></li>
+                <li className={pathname === '/about' ? 'text-[#6200ED]' : ''}><Link href="/about">About</Link></li>
+                <li className={pathname === '/profile' ? 'text-[#6200ED]' : ''}><Link href="/profile">Profile</Link></li>
+                <li className={pathname === '/' ? 'text-[#6200ED]' : ''}><Link href="/">Home</Link></li>
             </ul>
         </nav>
         {isloggedin ? <LoggedIn/> : <LogIn/>}
