@@ -5,7 +5,7 @@ import EditProfile from '../Button/EditProfile'
 import TrackList from '../Button/TrackList'
 const User = () => {
   return (
-    <div className='flex flex-col w-max justify-center items-center p-8 relative bottom-20 h-max'>
+    <div className='flex flex-col min-w-max justify-center items-center p-8 relative bottom-20 h-max'>
         <Image src={pfp} alt="profile picture" className='rounded-full shadow-2xl'></Image>
         <div className='flex flex-col justify-center items-center gap-3'>
             <div className='text-[32px] font-bold w-max'>Enko</div>
