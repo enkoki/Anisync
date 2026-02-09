@@ -1,3 +1,3 @@
 from .anime import Anime
-from .user import User
+from .user import Users
 from .watched import WatchedAnime
