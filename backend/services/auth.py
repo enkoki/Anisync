@@ -1,5 +1,13 @@
+from fastapi import HTTPException, status, Depends
 from passlib.context import CryptContext
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+from datetime import datetime, timedelta
+
+from config import SECRET_KEY, ALGORITHM, EXPIRATION_TIME
 from models import Users
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 hasher = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash(password: str):
