@@ -10,7 +10,7 @@ from schemas.token_schemas import TokenResponse
 from config import SECRET_KEY, ALGORITHM, EXPIRATION_TIME
 from models import Users
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login_for_token")
 hasher = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash(password: str):
