@@ -10,7 +10,7 @@ from schemas.token_schemas import TokenResponse
 from config import SECRET_KEY, ALGORITHM, EXPIRATION_TIME
 from models import Users
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login_for_token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 hasher = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash(password: str):
@@ -36,9 +36,9 @@ def register_user(user, db):
 def login_user(user_data, db):
     user = db.query(Users).filter(Users.username == user_data.username).first()
     if user is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Invalid credentials")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid credentials")
     if not verify_password(user_data, user.password):
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Invalid credentials")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid credentials")
     
     access_token = create_access_token(data = {"sub":user.username})
     return {"access_token":access_token, "token_type": "bearer"}
