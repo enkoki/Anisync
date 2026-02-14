@@ -1,7 +1,7 @@
 import AboutGrid from "./AboutGrid.jsx";
 function AboutFeatures() {
   return (
-    <div className="flex flex-col w-screen justify-center items-center">
+    <div className="flex flex-col w-screen justify-center items-center m-[12px]">
       <div className="text-[#B58FEA] font-bold text-6xl py-2">
         The next generation Anime Platform
       </div>
@@ -16,4 +16,3 @@ function AboutFeatures() {
   );
 }
 export default AboutFeatures;
-
