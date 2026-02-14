@@ -1,6 +1,3 @@
-import pfp from '@/app/assets/images/LoginPage/person-fill.png'
-import pfp1 from '@/app/assets/images/LoginPage/lock-fill.png'
-import Image from 'next/image'
 import Person from '@/app/assets/icons/Person'
 import Lock from '@/app/assets/icons/Lock'
 
@@ -11,7 +8,7 @@ export default function LoginContainer() {
                 <h2 className="mb-8 text-center text-4xl font-bold  text-[#6200ED]">LOG IN</h2> {/*[#6200ED]*/}
 
                 <form >
-                    <div className='flex flex-col gap-5'> {/*gap-4 */}
+                    <div className='flex flex-col gap-5'>
                         <div className="flex items-center border-2 border-[#6200ED] rounded-[15px] overflow-hidden w-[424px] h-[51px] ">
                             <div className="bg-[#6200ED] p-3">
                                 <Person></Person>
@@ -22,7 +19,7 @@ export default function LoginContainer() {
 
                         <div className="flex items-center border-2 border-[#6200ED] rounded-[15px] overflow-hidden w-[424px] h-[51px] ">
                             <div className="bg-[#6200ED] p-3">
-                                {/* <Image src={pfp1} className="h-6 w-6" alt="lock"></Image> */}
+
                                 <Lock></Lock>
                             </div>
                             <input type="password" className="p-3 outline-none w-full h-17.5  placeholder-[#6200ED] text-xl text-black" placeholder="Password" />
@@ -38,7 +35,7 @@ export default function LoginContainer() {
                 </form>
             </div>
 
-            <button className="rounded-[15px] bg-[#6200ED] py-4 text-xl font-bold text-white cursor-pointer h-[59px] w-[520px]">
+            <button className="rounded-[15px] bg-[#6200ED] py-4 text-xl font-bold text-white cursor-pointer h-[59px] w-[520px] hover:bg-[#4A00B5] transition duration-200 shadow-2xl ">
                 Log In
             </button>
         </div >
