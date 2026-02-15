@@ -31,7 +31,7 @@ export default function LoginContainer() {
             }
 
             // Save JWT token
-            localStorage.setItem("token", result.data.access_token)
+            localStorage.setItem("anisync_token", result.data.access_token)
             setIsLoggedIn(true)
             setLoading(false)
         } 

@@ -17,7 +17,8 @@ export async function loginHandling(username: string, password: string) {
     }
 
     return { success: true, data }
-  } catch (err) {
+  } 
+  catch (err) {
     return { success: false, message: "Network error" }
   }
 }
