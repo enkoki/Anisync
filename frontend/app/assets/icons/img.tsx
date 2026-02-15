@@ -1,11 +1,7 @@
-
 import pic from "@/app/assets/images/LoginPage/loginss.png";
-
-
 interface PropsType {
     children: React.ReactNode
 }
-
 const Picture = ({ children }: PropsType) => {
     return (
         <div

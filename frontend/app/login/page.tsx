@@ -1,8 +1,6 @@
-
 import Box from "../components/LoginBox/box"
 import Picture from "../assets/icons/img"
 import Back from "../assets/icons/back"
-
 
 export default function LoginPage() {
     return (
@@ -12,7 +10,6 @@ export default function LoginPage() {
                     <Back />
                 </Picture>
                 <Box />
-
             </div>
         </div>
     )

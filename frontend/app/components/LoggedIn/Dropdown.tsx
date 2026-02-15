@@ -1,7 +1,15 @@
+import useAuth from '@/app/hooks/useAuth';
 import React, { useState } from 'react'
 
 const Dropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const {isLoggedIn, setIsLoggedIn} = useAuth()
+
+	const handleLogout = () => {
+		localStorage.removeItem("anisync_token")
+		setIsLoggedIn(false)
+		window.location.href = "/"
+	}
 
   return (
     <div className='relative w-max'>
@@ -15,7 +23,7 @@ const Dropdown = () => {
                 <span className="hover:text-gray-400 cursor-pointer">Settings</span>
                 <span className="hover:text-gray-400 cursor-pointer">Notifications</span>
             </div>
-            <div className='flex justify-center items-center border-t border-t-white/20 w-full py-2 mt-2 hover:text-red-400 cursor-pointer'>
+            <div onClick={handleLogout} className='flex justify-center items-center border-t border-t-white/20 w-full py-2 mt-2 hover:text-red-400 cursor-pointer'>
                 Log Out
             </div>
          </div>
