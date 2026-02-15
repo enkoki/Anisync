@@ -1,11 +1,14 @@
+"use client";
+
 import Navbar from "./components/Navbar/Navbar"
 import HomeBody from "./components/HomePage/home";
 import Picture from "./assets/icons/title";
 import Buttons from "./assets/icons/homebutton";
+import useAuth from "./hooks/useAuth";
 
 
 export default function Home() {
-  const isLoggedIn = false; // toggle this value to switch from logged out to log in and vice versa
+  const {isLoggedIn} = useAuth()
   return (
     <>
       <Navbar isloggedin={isLoggedIn} />

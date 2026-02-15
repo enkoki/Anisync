@@ -22,8 +22,8 @@ export default function useAuth() {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [username, setUsername] = useState("Guest")
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [username, setUsername] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <AuthContext.Provider value={{ username, isLoggedIn, setIsLoggedIn, setUsername }}> {children} </AuthContext.Provider>
