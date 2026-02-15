@@ -36,8 +36,8 @@ def register_user(user, db):
 def login_user(user_data, db):
     user = db.query(Users).filter(Users.username == user_data.username).first()
     if user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid credentials")
-    if not verify_password(user_data, user.password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Username doesn't credentials")
+    if not verify_password(user_data.password, user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid credentials")
     
     access_token = create_access_token(data = {"sub":user.username})
