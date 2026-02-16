@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     siteName: "Anisync",
     images: [
       {
-        url: "https://anisynced.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fanisync_dark.6e4d74fc.png&w=128&q=75",
-        width: 1200,
-        height: 630,
+        url: "https://anisynced.netlify.app/og-logo.ico",
+        width: 128,
+        height: 128,
         alt: "Anisync App Preview",
       },
     ],
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Anisync - Start Tracking Anime Today",
     description: "Track your favorite anime, discover upcoming releases, and manage your watchlist effortlessly in one organized platform. Stay updated with the latest episodes, release schedules, and trending series so you never miss a moment of the anime you love.",
-    images: ["https://anisynced.netlify.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fanisync_dark.6e4d74fc.png&w=128&q=75"],
+    images: ["https://anisynced.netlify.app/og-logo.ico"],
   },
 };
 export default function RootLayout({
