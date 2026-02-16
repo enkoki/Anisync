@@ -14,10 +14,26 @@ function AboutIconsFeatures() {
         </span>
       </div>
       <div className="grid grid-cols-2 grid-rows-2 w-screen h-[500px] place-items-center gap-40">
-        <AboutIcon source={Icon1.src} />
-        <AboutIcon source={Icon2.src} />
-        <AboutIcon source={Icon3.src} />
-        <AboutIcon source={Icon4.src} />
+        <AboutIcon
+          source={Icon1.src}
+          heading="Discover new favourites"
+          description="Follow highest rated shows and get personalized recommendations based on your watch history."
+        />
+        <AboutIcon
+          source={Icon2.src}
+          heading="Take Anisync anywhere"
+          description="Keep track of your watchlist while travelling and enjoy add free high quality shows."
+        />
+        <AboutIcon
+          source={Icon3.src}
+          heading="Connect with people"
+          description="Express your opinions in the comment section, meet new friends with similar interests and socialize."
+        />
+        <AboutIcon
+          source={Icon4.src}
+          heading="Rice it!"
+          description="Customize your viewing experience with themes, custom leaderboards and more."
+        />
       </div>
     </div>
   );

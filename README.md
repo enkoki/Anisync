@@ -44,7 +44,7 @@ source venv/bin/activate.fish
 
 #####  Windows PowerShell
 ```bash
-source venv/bin/activate.ps1
+.\venv\bin\activate.ps1
 ```
 
 #####  Install dependencies
