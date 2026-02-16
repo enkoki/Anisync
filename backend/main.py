@@ -9,7 +9,9 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-origins = ["http://localhost:3000", "https://anisynced.netlify.app/"] # "https://yourfrontend.com"
+origins = [
+    "https://anisynced.netlify.app",  
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -18,7 +20,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(api_router)
 
 @app.get("/")
