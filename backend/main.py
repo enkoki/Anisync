@@ -9,9 +9,7 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-origins = [
-    "https://anisynced.netlify.app",  
-]
+origins = ["https://anisynced.netlify.app", "http://localhost:3000/"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,3 +23,7 @@ app.include_router(api_router)
 @app.get("/")
 def root():
     return {"status": "ok"}
+
+@app.get("/health", methods=["GET", "HEAD"])
+def health_check():
+    return JSONResponse({"status": "ok"})
