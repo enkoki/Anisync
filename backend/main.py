@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from db import engine, Base
@@ -24,6 +25,6 @@ app.include_router(api_router)
 def root():
     return {"status": "ok"}
 
-@app.get("/health", methods=["GET", "HEAD"])
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
     return JSONResponse({"status": "ok"})
