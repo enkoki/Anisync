@@ -1,0 +1,60 @@
+name: Frontend CI with Backend Check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@4
+
+      # ---------- Backend ----------
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14.2'
+
+      - name: Install Backend Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Start Backend in Background
+        run: |
+          uvicorn backend.main:app --host 127.0.0.1 --port 8000 &
+          sleep 5  # wait for backend to start
+
+      - name: Test Backend Response
+        run: |
+          curl -f http://127.0.0.1:8000/ || exit 1
+
+      # ---------- Frontend ----------
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '25.6.0'
+          cache: 'npm'
+
+      - name: Move to Frontend Folder
+        run: cd frontend  
+
+      - name: Install Frontend Dependencies
+        run: cd frontend && npm install
+
+      - name: Build Frontend
+        run: cd frontend && npm run build
+
+      - name: Test Frontend Fetch to Backend
+        run: |
+          cd frontend && node -e "
+          import fetch from 'node-fetch';
+          fetch('http://127.0.0.1:8000/')
+            .then(res => res.ok ? console.log('Backend reachable!') : process.exit(1))
+            .catch(err => { console.error(err); process.exit(1) });
+          "
