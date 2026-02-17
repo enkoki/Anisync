@@ -17,7 +17,7 @@ const Dropdown = () => {
      </div>
 
     {isOpen && (
-         <div className='absolute left-1/2 -translate-x-1/2 mt-2 flex flex-col justify-center items-center bg-[#040404] px-5 py-2 rounded-2xl text-xl w-max text-white border border-white/10 shadow-xl z-50'>
+         <div className='absolute left-1/2 -translate-x-1/2 mt-2 flex flex-col justify-center items-center bg-[#040404] px-5 py-2 rounded-2xl text-xl w-max text-white border border-white/10 shadow-xl z-200'>
             <div className='flex flex-col gap-5 justify-center items-center px-5 py-2'>
                 <span className="hover:text-gray-400 cursor-pointer">My Account</span>
                 <span className="hover:text-gray-400 cursor-pointer">Settings</span>
