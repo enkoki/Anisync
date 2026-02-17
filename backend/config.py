@@ -14,3 +14,5 @@ DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 EXPIRATION_TIME: int = int(os.getenv("EXPIRATION_TIME"))
+
+PW = os.getenv("PW")
