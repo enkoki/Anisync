@@ -9,9 +9,9 @@ const Profile = () => {
 
     const router = useRouter()
     const { isLoggedIn, username } = useAuth()
-
+    const {authLoading} = useAuth()
     useEffect(() => {
-        if(!isLoggedIn) router.push("/login")
+        if(!isLoggedIn && !authLoading) router.push("/login")
     }, [router, isLoggedIn])
 
     return (
