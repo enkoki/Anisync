@@ -14,6 +14,7 @@ export default function LoginContainer() {
     const [error, setError] = useState("")
     const router = useRouter()
     const {isLoggedIn, setIsLoggedIn} = useAuth()
+    const {authLoading} = useAuth()
 
     async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -70,7 +71,7 @@ export default function LoginContainer() {
     }, [error])
 
     useEffect(() => {
-        if(isLoggedIn) router.push("/profile")
+        if(!authLoading && isLoggedIn) router.push("/profile")
         return 
     }, [router, isLoggedIn])
 
