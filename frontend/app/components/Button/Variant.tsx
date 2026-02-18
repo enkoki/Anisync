@@ -14,7 +14,7 @@ const Variant = ( {content="Variant", route=true} : VariantProps) => {
       {content}
     </Link>
   ) : (
-    <div className={`rounded-4xl ${style}`}>{content}</div>
+    <div className={`text-[16px] sm:text-xl rounded-4xl ${style}`}>{content}</div>
   );
 };
 
