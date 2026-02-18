@@ -8,19 +8,19 @@ import useAuth from '@/app/hooks/useAuth'
 
 
 export default function LoginContainer() {
-    const [username, setUsername] = useState("")
+    const [username, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const router = useRouter()
-    const {isLoggedIn, setIsLoggedIn, authLoading, setUUID, setRoleID} = useAuth()
+    const {isLoggedIn, setIsLoggedIn, authLoading, setUUID, setRoleID, setUsername} = useAuth()
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        if (username === "user" && password === "user") {
-            setIsLoggedIn(true)
-            return
-        }
+        // if (username === "user" && password === "user") {
+        //     setIsLoggedIn(true)
+        //     return
+        // }
         if (errorHandling()) return
         setLoading(true)
         try {
@@ -80,7 +80,7 @@ export default function LoginContainer() {
     useEffect(() => {
         if(!authLoading && isLoggedIn) router.replace("/profile")
         return 
-    }, [router, isLoggedIn, authLoading])
+    }, [router, isLoggedIn, authLoading, username])
 
     return (
         <div className="flex w-[50%] flex-col items-center justify-center p-8 min-h-full bg-white rounded-tr-[85px] rounded-br-[85px]">
@@ -92,7 +92,7 @@ export default function LoginContainer() {
                             <div className="bg-[#6200ED] p-3">
                                 <Person></Person>
                             </div>
-                            <input disabled ={loading} type="text" className=" p-3 outline-none w-full placeholder-[#6200ED] text-xl text-black" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                            <input disabled ={loading} type="text" className=" p-3 outline-none w-full placeholder-[#6200ED] text-xl text-black" placeholder="Username" value={username} onChange={(e) => setUser(e.target.value)}/>
                         </div>
                         <div className="flex items-center border-2 border-[#6200ED] rounded-[15px] overflow-hidden w-106 h-12.75 ">
                             <div className="bg-[#6200ED] p-3">
