@@ -8,15 +8,14 @@ import Watching from '../components/Watching/Watching'
 const Profile = () => {
 
     const router = useRouter()
-    const { isLoggedIn, username } = useAuth()
-    const {authLoading} = useAuth()
+    const { isLoggedIn, authLoading } = useAuth()
     useEffect(() => {
-        if(!isLoggedIn && !authLoading) router.push("/login")
-    }, [router, isLoggedIn])
+        if(!isLoggedIn && !authLoading) router.replace("/login")
+    }, [router, isLoggedIn, authLoading])
 
     return (
     <>
-        <Navbar isloggedin={true}/>
+        <Navbar isloggedin={isLoggedIn}/>
         <div className='bg-[url(@/app/assets/images/Banner.png)] bg-cover bg-center bg-no-repeat w-screen h-[350px] rounded-b-[50px] shadow-2xl pt-[75px]'></div>
         <div className='h-full flex'>
             <User />
