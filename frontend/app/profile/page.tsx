@@ -18,8 +18,8 @@ const Profile = () => {
     <>
         <Navbar isloggedin={isLoggedIn}/>
         {authLoading ? <div className='flex justify-center items-center font-bold pt-[75px] h-screen text-[42px]'>Loading...</div> : <>
-            <div className='bg-[url(@/app/assets/images/Banner.png)] bg-cover bg-center bg-no-repeat w-screen h-[350px] rounded-b-[50px] shadow-2xl pt-[75px]'></div>
-            <div className='h-full flex'>
+            <div className='bg-[url(@/app/assets/images/Banner.png)] bg-cover bg-center bg-no-repeat w-screen h-[150px] sm:h-[200px] md:h-[250px] lg:h-[350px] rounded-b-[30px] lg:rounded-b-[50px] shadow-2xl pt-[75px]'></div>
+            <div className='h-full flex flex-col lg:flex-row'>
                 <User />
                 <Watching/>
             </div>
