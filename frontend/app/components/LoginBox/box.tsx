@@ -2,33 +2,29 @@
 import Person from '@/app/assets/icons/Person'
 import Lock from '@/app/assets/icons/Lock'
 import { useState, useEffect } from 'react'
-import { loginHandling } from '@/app/lib/auth'
+import { loginHandling, verify_session } from '@/app/lib/auth'
 import { useRouter } from 'next/navigation'
 import useAuth from '@/app/hooks/useAuth'
 
 
 export default function LoginContainer() {
-    const [username, setUsername] = useState("")
+    const [username, setUser] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
     const router = useRouter()
-    const {isLoggedIn, setIsLoggedIn} = useAuth()
-    const {authLoading} = useAuth()
+    const {isLoggedIn, setIsLoggedIn, authLoading, setUUID, setRoleID, setUsername} = useAuth()
 
-    async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(username == "user" && password === "user"){
-            setIsLoggedIn(true)
-            return
-        }
-        const hasError = errorHandling() 
-        if (hasError) return
-
+        // if (username === "user" && password === "user") {
+        //     setIsLoggedIn(true)
+        //     return
+        // }
+        if (errorHandling()) return
         setLoading(true)
         try {
             const result = await loginHandling(username.trim(), password.trim())
-
             if (!result.success) {
                 setError(result.message)
                 setLoading(false)
@@ -36,15 +32,26 @@ export default function LoginContainer() {
             }
 
             // Save JWT token
-            localStorage.setItem("anisync_token", result.data.access_token)
+            window.localStorage.setItem("anisync_token", result.data.access_token)
+            const session = await verify_session(result.data.access_token)
+            if (!session.success) {
+                setError("Login failed: could not fetch session")
+                setLoading(false)
+                return
+            }
+
+            setUsername(session.data.username)
+            setUUID(session.data.uuid)
+            setRoleID(session.data.role_id)
             setIsLoggedIn(true)
-            setLoading(false)
-        } 
-        catch (err: any) {
+
+        } catch (err: any) {
             setError(err?.message || "Login failed. Please try again.")
+        } finally {
             setLoading(false)
         }
     }
+
 
     function errorHandling() {
         if (!username && !password) {
@@ -71,9 +78,9 @@ export default function LoginContainer() {
     }, [error])
 
     useEffect(() => {
-        if(!authLoading && isLoggedIn) router.push("/profile")
+        if(!authLoading && isLoggedIn) router.replace("/profile")
         return 
-    }, [router, isLoggedIn])
+    }, [router, isLoggedIn, authLoading, username])
 
     return (
         <div className="flex w-[50%] flex-col items-center justify-center p-8 min-h-full bg-white rounded-tr-[85px] rounded-br-[85px]">
@@ -85,19 +92,19 @@ export default function LoginContainer() {
                             <div className="bg-[#6200ED] p-3">
                                 <Person></Person>
                             </div>
-                            <input type="text" className=" p-3 outline-none w-full placeholder-[#6200ED] text-xl text-black" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                            <input disabled ={loading} type="text" className=" p-3 outline-none w-full placeholder-[#6200ED] text-xl text-black" placeholder="Username" value={username} onChange={(e) => setUser(e.target.value)}/>
                         </div>
                         <div className="flex items-center border-2 border-[#6200ED] rounded-[15px] overflow-hidden w-106 h-12.75 ">
                             <div className="bg-[#6200ED] p-3">
                                 <Lock></Lock>
                             </div>
-                            <input type="password" className="p-3 outline-none w-full h-17.5  placeholder-[#6200ED] text-xl text-black" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <input disabled = {loading} type="password" className="p-3 outline-none w-full h-17.5  placeholder-[#6200ED] text-xl text-black" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                         </div>
                     </div>
                     {error && (<p className="text-red-500 text-center mt-3">{error}</p>)}
                     <p className="text-center text-sm text-black text-bold p-4">
                         Don't have an account?
-                        <span className="text-[#6200ED] font-bold cursor-pointer ml-1">
+                        <span className="text-[#6200ED] font-bold cursor-pointer ml-1" onClick={() => router.push("/register")}>
                             Register here
                         </span>
                     </p>
