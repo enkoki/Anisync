@@ -7,4 +7,6 @@ class Token(BaseModel):
     token_type:str
 
 class TokenResponse(BaseModel):
-    username: Optional[str]
+    username: str
+    uuid: str
+    role_id: int

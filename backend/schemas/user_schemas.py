@@ -13,8 +13,9 @@ class UserLogin(BaseModel):
 
 class UserOut(BaseModel):
     uuid: UUID
-    username: str
     email: EmailStr
+    username: str
+    role_id: int
     created_at: datetime
     updated_at: datetime
 

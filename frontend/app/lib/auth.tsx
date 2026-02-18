@@ -22,3 +22,23 @@ export async function loginHandling(username: string, password: string) {
     return { success: false, message: "Network error" }
   }
 }
+
+export async function verify_session(token: string){
+	try{
+		const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, 
+			{
+				headers: { Authorization: `Bearer ${token}` }
+			}
+		)
+	
+		const data = await res.json()
+		if(!res.ok){
+			return {success: false, message: data.detail || "Session Expired. Log In Again"}
+		}
+	
+		return {success: true, data}
+	}
+	catch(err){
+		return {success: false, message: "Network Error"}
+	}
+}

@@ -40,7 +40,7 @@ def login_user(user_data, db):
     if not verify_password(user_data.password, user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid credentials")
     
-    access_token = create_access_token(data = {"sub":user.username})
+    access_token = create_access_token(data = {"sub":user.username, "uuid":str(user.uuid), "role_id":user.role_id })
     return {"access_token":access_token, "token_type": "bearer"}
 
 def create_access_token(data: dict):
@@ -57,11 +57,13 @@ def verify_token(token: str) -> TokenResponse:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
+        uuid: str = payload.get("uuid")
+        role_id: int = payload.get("role_id")
 
         if username is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Could not verify credentials",headers={"WWW-Authenticate":"Bearer"})
         
-        return TokenResponse(username = username)
+        return TokenResponse(username = username, uuid = uuid, role_id = role_id)
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Could not verify credentials",headers={"WWW-Authenticate":"Bearer"})
 
@@ -71,5 +73,13 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     user = db.query(Users).filter(Users.username==token_data.username).first()
     if user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="User does not exist",headers={"WWW-Authenticate":"Bearer"})
-    return user
+    print(user.role_id)
+    return {
+        "uuid": str(user.uuid),
+        "email":user.email,
+        "username": user.username,
+        "role_id": user.role_id,
+        "created_at": user.created_at,
+        "updated_at": user.updated_at
+    }
     
