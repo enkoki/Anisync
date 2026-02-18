@@ -13,7 +13,6 @@ const Profile = () => {
         if(!isLoggedIn && !authLoading) router.replace("/login")
     }, [router, isLoggedIn, authLoading])
 
-
     return (
     <>
         <Navbar isloggedin={isLoggedIn}/>
