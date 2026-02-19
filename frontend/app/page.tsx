@@ -12,11 +12,11 @@ export default function Home() {
   return (
     <>
       <Navbar isloggedin={isLoggedIn} />
-      <div className="relative w-screen h-screen">
+      <div className="relative w-screen h-screen bg-black">
         <HomeBody >
           <Picture />
-          <div>
-            <h4 className=" text-[18px] text-[#4A4A4A] font-black">
+          <div className="z-20 flex flex-col justify-center items-center lg:items-start gap-5">
+            <h4 className=" text-[15px] sm:text-[18px] text-[#807f7f] font-black text-center">
               Start Tracking your watch list from today
             </h4>
             <Buttons />
