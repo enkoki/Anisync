@@ -6,7 +6,7 @@ import Logo from '@/app/assets/icons/email'
 
 export default function RegisterPage(){
     return(
-        <div className="flex w-[50%] flex-col items-center justify-center p-8 min-h-full bg-white rounded-tl-[85px] rounded-bl[85px] ">
+        <div className="flex w-[50%] flex-col items-center justify-center p-8 min-h-full bg-white rounded-tl-[85px] rounded-bl-[85px] ">
                     <div className=" max-w">
                         <h2 className="mb-8 text-center text-4xl font-bold  text-[#6200ED]">REGISTER</h2>
                         
