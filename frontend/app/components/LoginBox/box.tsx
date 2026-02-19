@@ -15,7 +15,7 @@ export default function LoginContainer() {
     const router = useRouter()
     const {isLoggedIn, setIsLoggedIn, authLoading, setUUID, setRoleID, setUsername} = useAuth()
 
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault()
         // if (username === "user" && password === "user") {
         //     setIsLoggedIn(true)
@@ -83,36 +83,39 @@ export default function LoginContainer() {
     }, [router, isLoggedIn, authLoading, username])
 
     return (
-        <div className="flex w-[50%] flex-col items-center justify-center p-8 min-h-full bg-white rounded-tr-[85px] rounded-br-[85px]">
-            <div className=" max-w">
-                <h2 className="mb-8 text-center text-4xl font-bold  text-[#6200ED]">LOG IN</h2>
-                <form className='flex flex-col justify-center items-center' onSubmit={(e) => handleSubmit(e)}>
-                    <div className='flex flex-col gap-5'>
-                        <div className="flex items-center border-2 border-[#6200ED] rounded-[15px] overflow-hidden w-106 h-12.75 ">
-                            <div className="bg-[#6200ED] p-3">
-                                <Person></Person>
+        <div className="flex w-full h-screen sm:lg:h-full sm:lg:w-[50%] flex-col items-center justify-center p-4 sm:p-8 min-h-full bg-white sm:lg:rounded-tr-[85px] sm:lg:rounded-br-[85px]">
+            <div className="w-full max-w-[280px] sm:max-w-md">
+
+                <h2 className="mb-6 sm:mb-8 text-center text-xl sm:text-2xl 2xl:text-4xl font-bold text-[#6200ED]">LOG IN</h2>
+                <form className="flex flex-col justify-center items-center" onSubmit={(e) => handleSubmit(e)}>
+                    <div className="flex flex-col gap-3 sm:gap-5 w-full">
+                        <div className="flex items-center border-2 border-[#6200ED] rounded-[12px] sm:rounded-[15px] overflow-hidden w-full">
+                            <div className="bg-[#6200ED] px-2 py-1 sm:px-3 sm:py-2 border-2 border-[#6200ED] h-full flex justify-center items-center">
+                                <Person />
                             </div>
-                            <input disabled ={loading} type="text" className=" p-3 outline-none w-full placeholder-[#6200ED] text-xl text-black" placeholder="Username" value={username} onChange={(e) => setUser(e.target.value)}/>
+                            <input disabled={loading} type="text" className="px-3 sm:px-4 h-10 sm:h-12 outline-none w-full placeholder-[#6200ED] text-base sm:text-lg 2xl:text-xl text-black" placeholder="Username" value={username} onChange={(e) => setUser(e.target.value)}  />
                         </div>
-                        <div className="flex items-center border-2 border-[#6200ED] rounded-[15px] overflow-hidden w-106 h-12.75 ">
-                            <div className="bg-[#6200ED] p-3">
-                                <Lock></Lock>
+                        <div className="flex items-center border-2 border-[#6200ED] rounded-[12px] sm:rounded-[15px] overflow-hidden w-full">
+                            <div className="bg-[#6200ED] p-2 sm:p-3 border-2 border-[#6200ED] h-full flex justify-center items-center">
+                                <Lock />
                             </div>
-                            <input disabled = {loading} type="password" className="p-3 outline-none w-full h-17.5  placeholder-[#6200ED] text-xl text-black" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-                        </div>
+                            <input disabled={loading} type="password" className="px-3 sm:px-4 h-10 sm:h-12 outline-none w-full placeholder-[#6200ED] text-base sm:text-lg 2xl:text-xl text-black" placeholder = "Password" value={password} onChange={(e) => setPassword(e.target.value)}/></div>
                     </div>
-                    {error && (<p className="text-red-500 text-center mt-3">{error}</p>)}
-                    <p className="text-center text-sm text-black text-bold p-4">
+
+                    {error && (
+                        <p className="text-red-500 text-center mt-2 sm:mt-3 text-sm sm:text-base">
+                            {error}
+                        </p>
+                    )}
+                    <p className="text-center text-xs sm:text-sm text-black text-bold p-3 sm:p-4">
                         Don't have an account?
-                        <span className="text-[#6200ED] font-bold cursor-pointer ml-1" onClick={() => router.push("/register")}>
-                            Register here
-                        </span>
+                        <span className="text-[#6200ED] font-bold cursor-pointer ml-1" onClick={() => router.push("/register")}>Register here</span>
                     </p>
-                    <button className="rounded-[15px] bg-[#6200ED] py-4 text-xl font-bold text-white cursor-pointer h-14.75 w-130 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70" type="submit" disabled={loading}>
+                    <button className="rounded-[12px] sm:rounded-[15px] bg-[#6200ED] py-3 sm:py-4 text-sm sm:text-md 2xl:text-xl font-bold text-white cursor-pointer h-12 sm:h-14.75 w-full disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70" type="submit" disabled={loading}>
                         {loading ? "Logging in..." : "Log In"}
                     </button>
                 </form>
             </div>
-        </div >
+        </div>
     )
 }
