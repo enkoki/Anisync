@@ -1,4 +1,4 @@
-import pic from "@/app/assets/images/LoginPage/loginss.png";
+import pic from "@/app/assets/images/LoginPage/loginss.webp";
 interface PropsType {
     children: React.ReactNode
 }
