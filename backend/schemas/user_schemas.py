@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr, ConfigDict
 from datetime import datetime
 from uuid import UUID
+from models.user import UserStatus 
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -16,11 +17,11 @@ class UserOut(BaseModel):
     email: EmailStr
     username: str
     role_id: int
+    status: UserStatus
     created_at: datetime
     updated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
-
 
 class UserResponse(BaseModel):
     id: int
@@ -33,6 +34,7 @@ class AllUserOut(BaseModel):
     email: EmailStr
     username: str
     role_id: int
+    status: UserStatus  
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)

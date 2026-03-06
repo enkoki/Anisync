@@ -78,6 +78,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         "email":user.email,
         "username": user.username,
         "role_id": user.role_id,
+        "status": user.status,
         "created_at": user.created_at,
         "updated_at": user.updated_at
     }
